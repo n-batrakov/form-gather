@@ -1,4 +1,4 @@
-import { getFormData } from '.'
+import { getFormData } from '../src'
 
 const testData: Array<[string, any]> = [
     ['<input type="text" name="text" value="test" />', { text: 'test' }],

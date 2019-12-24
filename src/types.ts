@@ -1,5 +1,3 @@
-import { Middleware } from './utils'
-
 export type ValueHandlerContext = {
     element: HTMLElement,
     tagName: string,
@@ -9,4 +7,7 @@ export type ValueHandlerContext = {
     multiple: boolean,
 }
 
-export type ValueHandler<T = any> = Middleware<ValueHandlerContext, T | null | undefined>
+type In = ValueHandlerContext
+type Out<T> = T | null | undefined
+export type ValueHandlerCallback<T = any> = (x: In) => Out<T>
+export type ValueHandler<T = any> = (val: In, next: ValueHandlerCallback<T>) => Out<T>

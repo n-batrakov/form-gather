@@ -1,4 +1,5 @@
 import { toArray, createHandler, filterElement } from './utils'
+import { ValueHandler } from './types'
 
 const SKIP_VALUE = undefined
 const NO_VALUE = null
@@ -17,12 +18,12 @@ export const radiobox = createHandler(
 
 export const inputNumber = createHandler(
     filterElement('input', 'number'),
-    ctx => parseFloat(ctx.value!),
+    ctx => ctx.value === undefined ? SKIP_VALUE : parseFloat(ctx.value!),
 )
 
 export const inputDate = createHandler(
     filterElement('input', 'date', 'datetime-local'),
-    ctx => new Date(Date.parse(ctx.value!)),
+    ctx => ctx.value === undefined ? SKIP_VALUE : new Date(Date.parse(ctx.value!)),
 )
 
 export const inputStatic = createHandler(
@@ -33,14 +34,12 @@ export const inputStatic = createHandler(
 export const inputFile = createHandler(
     filterElement('input', 'file'),
     (ctx) => {
-        const multiple = ctx.multiple
-        const filesList = (ctx.element as any).files as FileList | null
-
+        let filesList = (ctx.element as any).files as FileList | null
         if (filesList === null) return SKIP_VALUE
 
-        const files = toArray(filesList)
+        let files = toArray(filesList)
 
-        if (multiple) {
+        if (ctx.multiple) {
             return files
         } else {
             return files.length === 1 ? files[0] : NO_VALUE
@@ -55,7 +54,18 @@ export const select = createHandler(
             return ctx.value
         }
 
-        const select = ctx.element as HTMLSelectElement
+        let select = ctx.element as HTMLSelectElement
         return toArray(select.options).map(x => x?.selected ? x.value : NOT_SELECTED_VALUE)
     },
 )
+
+export const defaultHandlers: ValueHandler[] = [
+    inputStatic,
+    inputNumber,
+    inputFile,
+    inputDate,
+    checkbox,
+    radiobox,
+    select,
+    x => x.value,
+]

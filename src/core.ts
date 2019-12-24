@@ -1,18 +1,18 @@
 import { ValueHandlerContext } from './types'
 
 export function gather(target: HTMLFormElement, getElementValue: (x: ValueHandlerContext) => any) {
-    const result: { [key: string]: any } = {}
+    let result: { [key: string]: any } = {}
 
     for (let i = 0; i < target.elements.length; i++) {
-        const element = target.elements.item(i) as HTMLElement | null
+        let element = target.elements.item(i) as HTMLElement | null
         if (element === null || element.nodeType !== element.ELEMENT_NODE) continue
 
-        const name = element.getAttribute('name')
+        let name = element.getAttribute('name')
         if (name === null) continue
 
-        const ctx = createHandlerContext(element)
-        const value = getElementValue(ctx)
-        const prev = result[name]
+        let ctx = createHandlerContext(element)
+        let value = getElementValue(ctx)
+        let prev = result[name]
 
         if (prev === undefined) {
             result[name] = value === undefined ? null : value

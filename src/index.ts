@@ -1,20 +1,8 @@
 import { gather } from './core'
 import { combine } from './utils'
-import { ValueHandler } from './types'
-import * as defaultHandlers from './handlers'
-
-export const composeFormHandlers = (...customHandlers: ValueHandler[]) => {
-    const handler = combine(
-        ...customHandlers,
-        ...Object.values(defaultHandlers),
-        ctx => ctx.value,
-    )
-
-    return (target: HTMLFormElement) => gather(target, handler)
-}
-
-
-export const getFormData = composeFormHandlers()
+import { defaultHandlers } from './handlers'
 
 export { ValueHandler, ValueHandlerContext } from './types'
 export { gather } from './core'
+
+export const getFormData = (target: HTMLFormElement) => gather(target, combine(...defaultHandlers))

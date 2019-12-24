@@ -13,6 +13,7 @@
         "max-line-length": false,
         "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"],
         "no-consecutive-blank-lines": false,
-        "semicolon": [true, "never"]
+        "semicolon": [true, "never"],
+        "prefer-const": false
     }
 }
