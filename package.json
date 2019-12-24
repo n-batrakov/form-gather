@@ -8,15 +8,20 @@
   },
   "size-limit": [
     {
-      "path": "dist/index.js",
+      "path": "dist/*.js",
       "limit": "850 B"
     }
   ],
-  "browserslist": ["chrome >= 6", "firefox >= 21", "ie >= 11"],
+  "browserslist": [
+    "chrome >= 6",
+    "firefox >= 21",
+    "ie >= 11"
+  ],
   "scripts": {
     "start": "jest --watch",
     "build": "tsc",
     "test": "jest",
+    "test:karma": "karma start karma.conf.js",
     "lint": "tslint --project .",
     "lint:fix": "npm run lint -- --fix",
     "size": "size-limit",
@@ -28,7 +33,13 @@
     "@types/jest": "^24.0.23",
     "eslint": "^6.8.0",
     "eslint-plugin-compat": "^3.3.0",
+    "jasmine-core": "^3.5.0",
     "jest": "^24.9.0",
+    "karma": "^4.4.1",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-typescript": "^4.1.1",
+    "puppeteer": "^2.0.0",
     "ts-jest": "^24.2.0",
     "tslint": "^5.20.1",
     "tslint-config-airbnb": "^5.11.2",
