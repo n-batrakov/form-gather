@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "rootDir": "src",
+        "baseUrl": "src",
+
+
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es2015",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+
+        "noImplicitReturns": false,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "allowSyntheticDefaultImports": true,
+        "lib": ["es2017", "dom"],
+
+        "jsx": "react",
+        "jsxFactory": "h"
+    },
+    "include": ["src"],
+    "exclude": [
+        "node_modules"
+    ]
+}

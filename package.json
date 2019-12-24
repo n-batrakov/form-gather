@@ -1,0 +1,33 @@
+{
+  "name": "formerly",
+  "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "15 KB"
+    }
+  ],
+  "scripts": {
+    "start": "jest --watch",
+    "build": "cross-env NODE_ENV=production webpack",
+    "test": "jest",
+    "lint": "tslint --project .",
+    "lint:fix": "npm run lint -- --fix",
+    "size": "npm run build && size-limit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "jest": "^24.9.0",
+    "size-limit": "^2.2.2",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "tslint-config-airbnb": "^5.11.2",
+    "typescript": "3.7.3"
+  }
+}
