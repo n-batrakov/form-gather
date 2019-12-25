@@ -28,7 +28,9 @@ jobs:
           echo Bump version to ${VERSION}
           npm version --no-git-tag-version ${VERSION}
 
-          git remote set-url --push origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git config user.name n-batrakov
+          git config user.email 'n-batrakov@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git commit -m "chore(release): ${VERSION}"
           git push
         env:
