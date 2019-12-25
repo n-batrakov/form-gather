@@ -1,4 +1,6 @@
-import { ValueHandlerContext } from './types'
+import { ValueHandlerContext, HTMLArray } from './types'
+
+type ElementsArray = HTMLArray<Element> | Array<Element>
 
 /**
  * Function for form element values handling
@@ -9,16 +11,23 @@ import { ValueHandlerContext } from './types'
 */
 
 /**
+ * @name getItem
+ * @function
+ * @param {number} i - element index
+ * @return - element
+ */
+
+/**
  * Given form and element value handler, returns form-data object
- * @param {HTMLFormElement} target - form elements collection
+ * @param {{ length: number, item: getItem }} elements - form elements collection
  * @param {getElementValue} getElementValue - function for form element values handling
  * @return {Object} - form data object
  */
-export function gather(target: HTMLFormElement, getElementValue: (x: ValueHandlerContext) => any): { [key: string]: any } {
+export function gather(elements: ElementsArray, getElementValue: (x: ValueHandlerContext) => any): { [key: string]: any } {
     let result: { [key: string]: any } = {}
 
-    for (let i = 0; i < target.elements.length; i++) {
-        let element = target.elements.item(i) as HTMLElement | null
+    for (let i = 0; i < elements.length; i++) {
+        let element = (Array.isArray(elements) ? elements[i] : elements.item(i)) as HTMLElement | null
         if (element === null || element.nodeType !== element.ELEMENT_NODE) continue
 
         let name = element.getAttribute('name')

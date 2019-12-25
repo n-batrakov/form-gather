@@ -4,6 +4,8 @@ import { defaultHandlers } from './handlers'
 
 export { ValueHandler, ValueHandlerContext } from './types'
 export { gather } from './core'
+export { combine } from './utils'
+export { defaultHandlers } from './handlers'
 
 const handler = combine(...defaultHandlers)
 
@@ -12,4 +14,4 @@ const handler = combine(...defaultHandlers)
  * @param target - HTML form element
  * @retrun - form-data object
  */
-export const getFormData = (target: HTMLFormElement) => gather(target, handler)
+export const getFormData = (target: HTMLFormElement) => gather(target.elements, handler)

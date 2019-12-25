@@ -1,7 +1,4 @@
-import { ValueHandlerContext, ValueHandler, ValueHandlerCallback } from './types'
-
-type HTMLArray<T> = { length: number, item: (i: number) => T | null }
-
+import { ValueHandlerContext, ValueHandler, ValueHandlerCallback, HTMLArray } from './types'
 
 /**
  * Converts HTML collection into plain array
@@ -24,7 +21,7 @@ export function toArray<T>(src: HTMLArray<T>): Array<T> {
  * @param fns - element value handling functions
  * @return - single value handler
  */
-export function combine<A, B>(...fns: ValueHandler[]): ValueHandlerCallback {
+export function combine(...fns: ValueHandler[]): ValueHandlerCallback {
     return fns.reduceRight<ValueHandlerCallback>(
         (prev, next) => ctx => next(ctx, prev),
         () => { throw new Error('No middleware handled the context') },
