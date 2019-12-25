@@ -16,16 +16,23 @@ jobs:
       - run: npm test
 
   bump-version:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: export VERSION=${GITHUB_REF:11} && echo Bump version to ${VERSION}
-      - run: npm version --no-git-tag-version ${VERSION}
-      - run: "git commit -m \"chore(release): ${VERSION}\""
-      - run: git push
+      - run: |
+          export VERSION=${GITHUB_REF:11}
+          echo Bump version to ${VERSION}
+          npm version --no-git-tag-version ${VERSION}
+
+          git remote set-url --push origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git commit -m "chore(release): ${VERSION}"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-npm:
     needs: bump-version
