@@ -20,12 +20,14 @@
   "scripts": {
     "start": "jest --watch",
     "build": "tsc",
-    "test": "jest",
+    "prepublish": "tsc --outDir .",
+    "test": "npm run build && npm run test:jest && npm run test:compat && npm run test:size",
+    "test:jest": "jest",
     "test:karma": "karma start karma.conf.js",
+    "test:size": "size-limit",
+    "test:compat": "eslint ./dist",
     "lint": "tslint --project .",
-    "lint:fix": "npm run lint -- --fix",
-    "size": "size-limit",
-    "compat": "eslint ./dist"
+    "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {},
   "devDependencies": {
