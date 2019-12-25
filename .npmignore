@@ -1,0 +1,11 @@
+.github/
+.vscode/
+dist/
+node_modules/
+.eslintrc.json
+.gitattributes
+.gitignore
+jest.config.js
+karma.conf.js
+tsconfig.json
+tslint.json
