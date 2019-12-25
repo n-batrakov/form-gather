@@ -1,6 +1,20 @@
 import { ValueHandlerContext } from './types'
 
-export function gather(target: HTMLFormElement, getElementValue: (x: ValueHandlerContext) => any) {
+/**
+ * Function for form element values handling
+ * @name getElementValue
+ * @function
+ * @param {Object} context - form element context, including element itself and its most used properties and attributes
+ * @return - form element value
+*/
+
+/**
+ * Given form and element value handler, returns form-data object
+ * @param {HTMLFormElement} target - form elements collection
+ * @param {getElementValue} getElementValue - function for form element values handling
+ * @return {Object} - form data object
+ */
+export function gather(target: HTMLFormElement, getElementValue: (x: ValueHandlerContext) => any): { [key: string]: any } {
     let result: { [key: string]: any } = {}
 
     for (let i = 0; i < target.elements.length; i++) {
