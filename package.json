@@ -9,7 +9,7 @@
   "size-limit": [
     {
       "path": "dist/*.js",
-      "limit": "850 B"
+      "limit": "1 KB"
     }
   ],
   "browserslist": [

@@ -7,7 +7,7 @@ Works similar to browsers FormData but returns a plain object and works in IE 9+
 Features:
 * Does not depend on `FormData` browser API.
 * Customizable - you can decide how to handle every form element.
-* Tiny - 187 bytes (minified and gzipped). No dependencies. Size Limit controls the size.
+* No dependencies.
 * Written with TypeScript.
 
 ## Getting started
